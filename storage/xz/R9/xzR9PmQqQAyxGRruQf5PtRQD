@@ -1,0 +1,211 @@
+#include <stdio.h>
+void main (void)
+{
+
+
+/* Declare variables */
+/*-------------------*/
+int num_deposit = 0, i, s;
+
+int num_withdrawal = 0;
+
+float current_balance;
+
+float ending_balance;
+
+float total_deposit = 0;
+
+float deposit[5];
+
+float withdrawals[5];
+
+  
+
+
+/* Intro and greeting to user. Allows starts the input sequence for the user */
+/*---------------------------------------------------------------------------*/
+printf("Welcome to the Computer Banking System \n\n");
+
+printf("Enter your current balance in dollars and cents: ");
+
+scanf("%f", &current_balance);
+
+while(current_balance < 0)
+
+{
+
+printf("*** Beginning balance must be at least zero, please re-enter!");
+
+printf("Now enter current balance in dollars and cents: ");
+
+scanf("%f", &current_balance);
+
+  
+
+}
+
+printf("\nEnter the number of deposits: ");
+
+scanf("%d", &num_deposit);
+
+  
+
+while(num_deposit < 0||num_deposit>5)
+
+{
+
+printf("\n*** Invalid number of deposits must be at least zero,");
+
+printf("please re-enter.\n");
+
+printf("Enter the number of deposits: ");
+
+scanf("%d", &num_deposit);
+
+  
+
+}
+
+printf("\nEnter the number of withdrawals: ");
+
+scanf("%d", &num_withdrawal);
+
+while(num_withdrawal < 0||num_withdrawal>5)
+
+{
+
+printf("*** Invalid number of withdrawals must be at least zero,please re-enter.\n");
+
+printf("Enter the number of withdrawals: ");
+
+scanf("%d", &num_withdrawal);
+
+
+  
+
+}
+
+for(i = 0; i < num_deposit; i++)
+
+{
+
+printf("\nEnter the amount of deposit #%d: ", i+1);
+
+scanf("%f", &deposit[i]);
+
+while(deposit[i]<0)
+
+{
+
+printf("*** deposit amount must be at least zero\n");
+
+printf("please re-enter.\n");
+
+printf("\nEnter the amount of deposit #%d: ", i+1);
+
+scanf("%f", &deposit[i]);
+
+}
+
+total_deposit+=deposit[i];
+
+  
+
+}
+
+for(i = 0; i < num_withdrawal; i++)
+
+{
+
+printf("\nEnter the amount of withdrawal #%d: ", i+1);
+
+scanf("%f", &withdrawals[i]);
+
+while(withdrawals[i]<0)
+
+{
+
+printf("*** withdrawal amount must be at least zero\n");
+
+printf("please re-enter.\n");
+
+printf("\nEnter the amount of withdrawal #%d: ", i+1);
+
+scanf("%f", &withdrawals[i]);
+
+}
+
+if(withdrawals[i]>(current_balance+total_deposit))
+
+{
+
+printf("*** Withdrawal amount exceeds current balance. ***\n");
+  
+
+}
+
+else
+
+total_deposit -=withdrawals[i];
+
+/* gives user their total, along with some financial advice or statements */
+/*------------------------------------------------------------------------*/
+
+}
+
+ending_balance= current_balance+total_deposit;
+
+printf("The closing balance is %.2f\n",ending_balance);
+  
+if(ending_balance>=50000)
+
+printf("*** it is time to invest some money***\n");
+
+else if(ending_balance>=15000)
+
+printf("*** maybe you should consider a CD. ***\n");
+
+else if(ending_balance>=1000)
+
+printf("*** keep up the good work. ***\n");
+
+else if(ending_balance>=0)
+  
+printf("*** your balance is getting low. ***\n");
+  
+/* Provides a bank record or statement. Providing totals*/
+/*------------------------------------------------------*/
+
+printf("***** Bank Record ******\n");
+
+printf("Starting Balance $%.2f\n\n",current_balance);
+
+for(i = 0; i < num_deposit; i++)
+
+{
+
+printf("Deposit #%d : $%.2f\n",i+1,deposit[i]);
+
+}
+
+printf("\n");
+
+for(i = 0; i < num_withdrawal; i++)
+
+{
+
+printf("Withdrawal #%d : $%.2f\n",i+1,withdrawals[i]);
+
+}
+
+printf("\n");
+
+printf("Ending balance :$%.2f\n",ending_balance);
+
+printf("\n");
+
+}
+
+
+//end main
+
