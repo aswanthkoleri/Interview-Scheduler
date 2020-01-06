@@ -1,2 +1,2 @@
 # Interview-Scheduler
-A Ruby to app to Schedule Interviews
+A Ruby on rails app to Schedule Interviews
