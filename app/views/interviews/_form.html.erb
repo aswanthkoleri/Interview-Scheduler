@@ -28,7 +28,7 @@
 
   <div class="field">
     <%= form.label :participants %>
-    <%= form.text_field :participants, id: :interview_participants %>
+    <%= collection_select(:interview, :participant_ids, Participant.all, :id, :email, {}, { :multiple => true } )%>
   </div>
 
   <div class="field">

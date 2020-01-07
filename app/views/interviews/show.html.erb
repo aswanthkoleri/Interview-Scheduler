@@ -17,7 +17,7 @@
 
 <p>
   <strong>Participants:</strong>
-  <%= @interview.participants %>
+  <%= @interview.participants.map(&:name).join(', ') %>
 </p>
 
 <p>

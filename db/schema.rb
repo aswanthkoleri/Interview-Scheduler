@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_01_06_141143) do
+ActiveRecord::Schema.define(version: 2020_01_07_073545) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -37,10 +37,18 @@ ActiveRecord::Schema.define(version: 2020_01_06_141143) do
     t.time "startTime"
     t.time "endTime"
     t.date "interviewDate"
-    t.string "participants"
+    t.integer "participant_id"
     t.string "title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
+
+  create_table "interviews_participants", id: false, force: :cascade do |t|
+    t.integer "interview_id", null: false
+    t.integer "participant_id", null: false
+  end
+
+# Could not dump table "participants" because of following StandardError
+#   Unknown type 'email' for column 'email'
 
 end

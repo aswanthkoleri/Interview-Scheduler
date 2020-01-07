@@ -20,7 +20,7 @@
         <td><%= interview.startTime %></td>
         <td><%= interview.endTime %></td>
         <td><%= interview.interviewDate %></td>
-        <td><%= interview.participants %></td>
+        <td><%= interview.participants.map(&:name).join(', ') %></td>
         <td><%= interview.title %></td>
         <td><%= link_to 'Show', interview %></td>
         <td><%= link_to 'Edit', edit_interview_path(interview) %></td>

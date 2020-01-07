@@ -1,10 +1,23 @@
+class Notify
+  def initialize(time,interviewId)
+    @time = time
+    @interviewId = interviewId
+  end
+end
 class InterviewsController < ApplicationController
   before_action :set_interview, only: [:show, :edit, :update, :destroy]
-
   # GET /interviews
   # GET /interviews.json
+  @@notifyArray = []
   def index
     @interviews = Interview.all
+    all = []
+    @interviews.each do |interview|
+      all+=[Notify.new(interview.startTime,interview.id)]
+      # puts "run"
+    end
+    @@notifyArray = all
+    puts @@notifyArray
   end
 
   # GET /interviews/1
@@ -26,8 +39,15 @@ class InterviewsController < ApplicationController
   def create
     @interview = Interview.new(interview_params)
 
+    params[:interview][:participant_ids].each do |participant_id|
+      unless participant_id.empty?
+      participant = Participant.find(participant_id)
+        @interview.participants << participant
+      end
+    end
     respond_to do |format|
       if @interview.save
+
         format.html { redirect_to @interview, notice: 'Interview was successfully created.' }
         format.json { render :show, status: :created, location: @interview }
       else
@@ -40,6 +60,12 @@ class InterviewsController < ApplicationController
   # PATCH/PUT /interviews/1
   # PATCH/PUT /interviews/1.json
   def update
+    params[:interview][:participant_ids].each do |participant_id|
+      unless participant_id.empty?
+      participant = Participant.find(participant_id)
+        @interview.participants << participant
+      end
+    end
     respond_to do |format|
       if @interview.update(interview_params)
         format.html { redirect_to @interview, notice: 'Interview was successfully updated.' }
