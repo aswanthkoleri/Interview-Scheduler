@@ -11,6 +11,7 @@ class InterviewsController < ApplicationController
   @@notifyArray = []
   def index
     @interviews = Interview.all
+    # ReminderMailer.sample_email("aswanth@interviewbit.com").deliver_now
     all = []
     @interviews.each do |interview|
       all+=[Notify.new(interview.startTime,interview.id)]
@@ -47,7 +48,21 @@ class InterviewsController < ApplicationController
     end
     respond_to do |format|
       if @interview.save
-
+        d = @interview.interviewDate
+        t = @interview.startTime
+        start = DateTime.new(d.year,d.month,d.day,t.hour,t.min,t.sec,t.zone).utc.to_i
+        current = Time.now.utc.to_i
+        participants = @interview.participants
+        # ReminderMailer.sample_email("aswanth@interviewbit.com").deliver_now
+        # HardWorker.perform_in((start-current-1800).seconds,participants)
+        # puts participants[0].email, participants[1].email
+        emails = []
+        participants.each do |p|
+          emails += [p.email]
+        end
+        puts emails
+        # HardWorker.perform_at(2.seconds,emails)
+        HardWorker.perform_at((start-current-1800).seconds,emails)
         format.html { redirect_to @interview, notice: 'Interview was successfully created.' }
         format.json { render :show, status: :created, location: @interview }
       else

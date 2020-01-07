@@ -4,7 +4,6 @@ class CreateParticipants < ActiveRecord::Migration[5.2]
       t.string :name
       t.string :role
       t.integer :interview_id
-
       t.timestamps
     end
   end
