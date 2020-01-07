@@ -59,6 +59,7 @@ class InterviewsController < ApplicationController
         emails = []
         participants.each do |p|
           emails += [p.email]
+          ReminderMailer.created_email(p.email).deliver_now
         end
         puts emails
         # HardWorker.perform_at(2.seconds,emails)
@@ -82,7 +83,14 @@ class InterviewsController < ApplicationController
       end
     end
     respond_to do |format|
+
       if @interview.update(interview_params)
+        participants = @interview.participants
+        emails = []
+        participants.each do |p|
+          emails += [p.email]
+          ReminderMailer.update_email(p.email).deliver_now
+        end
         format.html { redirect_to @interview, notice: 'Interview was successfully updated.' }
         format.json { render :show, status: :ok, location: @interview }
       else
@@ -96,6 +104,12 @@ class InterviewsController < ApplicationController
   # DELETE /interviews/1.json
   def destroy
     @interview.destroy
+    participants = @interview.participants
+        emails = []
+        participants.each do |p|
+          emails += [p.email]
+          ReminderMailer.cancel_email(p.email).deliver_now
+        end
     respond_to do |format|
       format.html { redirect_to interviews_url, notice: 'Interview was successfully destroyed.' }
       format.json { head :no_content }
