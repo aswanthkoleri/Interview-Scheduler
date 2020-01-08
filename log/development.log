@@ -12891,3 +12891,560 @@ Processing by ParticipantsController#edit as HTML
 Completed 200 OK in 55ms (Views: 44.0ms | ActiveRecord: 0.4ms)
 
 
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from instance_eval at /Users/rishabhjaroli/.rvm/gems/ruby-2.3.8/gems/activesupport-5.2.4.1/lib/active_support/lazy_load_hooks.rb:71)
+Started GET "/" for ::1 at 2020-01-08 12:56:27 +0530
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/rishabhjaroli/.rvm/gems/ruby-2.3.8/gems/activerecord-5.2.4.1/lib/active_record/log_subscriber.rb:98
+Processing by InterviewsController#index as HTML
+  [1m[36mInterview Load (0.4ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews"[0m
+  ↳ app/controllers/interviews_controller.rb:16
+  Rendering interviews/index.html.erb within layouts/application
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 41]]
+  ↳ app/views/interviews/index.html.erb:23
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 42]]
+  ↳ app/views/interviews/index.html.erb:23
+  [1m[36mParticipant Load (0.1ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 43]]
+  ↳ app/views/interviews/index.html.erb:23
+  [1m[36mParticipant Load (0.1ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 44]]
+  ↳ app/views/interviews/index.html.erb:23
+  Rendered interviews/index.html.erb within layouts/application (58.5ms)
+Completed 200 OK in 416ms (Views: 358.1ms | ActiveRecord: 3.4ms)
+
+
+Started GET "/interviews/new" for ::1 at 2020-01-08 12:56:30 +0530
+Processing by InterviewsController#new as HTML
+  Rendering interviews/new.html.erb within layouts/application
+  [1m[36mParticipant Load (0.5ms)[0m  [1m[34mSELECT "participants".* FROM "participants"[0m
+  ↳ app/views/interviews/_form.html.erb:31
+  Rendered interviews/_form.html.erb (65.8ms)
+  Rendered interviews/new.html.erb within layouts/application (71.1ms)
+Completed 200 OK in 107ms (Views: 100.8ms | ActiveRecord: 0.5ms)
+
+
+Started POST "/interviews" for ::1 at 2020-01-08 12:56:46 +0530
+Processing by InterviewsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"2p1IQHyMc2dW6AJWQsZf8bBlHTmCz2oj/OoLn69h7MQQ5iQ70vg7QQcC/StXDYfW1gorsDcQjTcf0pMzm/jRdw==", "interview"=>{"startTime(1i)"=>"2020", "startTime(2i)"=>"1", "startTime(3i)"=>"8", "startTime(4i)"=>"07", "startTime(5i)"=>"26", "endTime(1i)"=>"2020", "endTime(2i)"=>"1", "endTime(3i)"=>"8", "endTime(4i)"=>"08", "endTime(5i)"=>"26", "interviewDate(1i)"=>"2020", "interviewDate(2i)"=>"1", "interviewDate(3i)"=>"8", "participant_ids"=>["", "1", "3"], "title"=>"dsa", "resume"=>#<ActionDispatch::Http::UploadedFile:0x00007fa4d1281d10 @tempfile=#<Tempfile:/var/folders/y7/n0m5qwv50hv5zpbmk3rsfktc0000gn/T/RackMultipart20200108-66903-aw16n8.md>, @original_filename="README.md", @content_type="application/octet-stream", @headers="Content-Disposition: form-data; name=\"interview[resume]\"; filename=\"README.md\"\r\nContent-Type: application/octet-stream\r\n">}, "commit"=>"Create Interview"}
+Unpermitted parameter: :participant_ids
+[36m  Disk Storage (2.3ms) [0m[32mUploaded file to key: kFgEYQBcQr4ZFFe8teuib7EV (checksum: EUkEt1YM/TxwDYp8OuRFqA==)[0m
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:41
+  [1m[36mActiveStorage::Blob Create (0.8ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["key", "kFgEYQBcQr4ZFFe8teuib7EV"], ["filename", "README.md"], ["content_type", "text/markdown"], ["metadata", "{\"identified\":true}"], ["byte_size", 53], ["checksum", "EUkEt1YM/TxwDYp8OuRFqA=="], ["created_at", "2020-01-08 07:26:46.864299"]]
+  ↳ app/controllers/interviews_controller.rb:41
+  [1m[35m (2.0ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/interviews_controller.rb:41
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:41
+  [1m[35m (0.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/interviews_controller.rb:41
+  [1m[36mParticipant Load (0.3ms)[0m  [1m[34mSELECT  "participants".* FROM "participants" WHERE "participants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:45
+  [1m[36mParticipant Load (0.1ms)[0m  [1m[34mSELECT  "participants".* FROM "participants" WHERE "participants"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:45
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:50
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 1]]
+  ↳ app/models/interview.rb:9
+  [1m[36mInterview Load (0.1ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 3]]
+  ↳ app/models/interview.rb:9
+  [1m[36mInterview Create (0.4ms)[0m  [1m[32mINSERT INTO "interviews" ("startTime", "endTime", "interviewDate", "title", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["startTime", "2000-01-01 07:26:00"], ["endTime", "2000-01-01 08:26:00"], ["interviewDate", "2020-01-08"], ["title", "dsa"], ["created_at", "2020-01-08 07:26:46.918268"], ["updated_at", "2020-01-08 07:26:46.918268"]]
+  ↳ app/controllers/interviews_controller.rb:50
+  [1m[36mActiveStorage::Attachment Create (0.3ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "resume"], ["record_type", "Interview"], ["record_id", 45], ["blob_id", 61], ["created_at", "2020-01-08 07:26:46.921952"]]
+  ↳ app/controllers/interviews_controller.rb:50
+  [1m[36mInterview::HABTM_Participants Create (0.2ms)[0m  [1m[32mINSERT INTO "interviews_participants" ("interview_id", "participant_id") VALUES (?, ?)[0m  [["interview_id", 45], ["participant_id", 1]]
+  ↳ app/controllers/interviews_controller.rb:50
+  [1m[36mInterview::HABTM_Participants Create (0.1ms)[0m  [1m[32mINSERT INTO "interviews_participants" ("interview_id", "participant_id") VALUES (?, ?)[0m  [["interview_id", 45], ["participant_id", 3]]
+  ↳ app/controllers/interviews_controller.rb:50
+  [1m[36mInterview Update (0.1ms)[0m  [1m[33mUPDATE "interviews" SET "updated_at" = ? WHERE "interviews"."id" = ?[0m  [["updated_at", "2020-01-08 07:26:46.923827"], ["id", 45]]
+  ↳ app/controllers/interviews_controller.rb:50
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/interviews_controller.rb:50
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: 135c7ecf-77b2-4718-96ee-e9d6b8415d5a) to Sidekiq(default) with arguments: #<GlobalID:0x00007fa4d102b9f8 @uri=#<URI::GID gid://interviewapp/ActiveStorage::Blob/61>>
+  Rendering reminder_mailer/created_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/created_email.html.erb within layouts/mailer (0.9ms)
+ReminderMailer#created_email: processed outbound mail in 82.9ms
+Sent mail to interviewer@gmail.com (5271.0ms)
+Date: Wed, 08 Jan 2020 12:56:47 +0530
+From: aswanth9495@gmail.com
+To: interviewer@gmail.com
+Message-ID: <5e158437590a6_105573fd2659ea87811543@Rishabhs-MacBook-Air.local.mail>
+Subject: Interview Created
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Interview is created</h1>
+    <p>
+      Thanks! 
+    </p>
+  </body>
+</html>
+  </body>
+</html>
+
+  Rendering reminder_mailer/created_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/created_email.html.erb within layouts/mailer (0.1ms)
+ReminderMailer#created_email: processed outbound mail in 43.9ms
+Sent mail to shadow1@gmail.com (4859.7ms)
+Date: Wed, 08 Jan 2020 12:56:52 +0530
+From: aswanth9495@gmail.com
+To: shadow1@gmail.com
+Message-ID: <5e15843ca4d55_105573fd2659ea8781162a@Rishabhs-MacBook-Air.local.mail>
+Subject: Interview Created
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Interview is created</h1>
+    <p>
+      Thanks! 
+    </p>
+  </body>
+</html>
+  </body>
+</html>
+
+Redirected to http://localhost:3001/interviews/45
+Completed 302 Found in 10773ms (ActiveRecord: 9.3ms)
+
+
+Started GET "/interviews/45" for ::1 at 2020-01-08 12:56:57 +0530
+Processing by InterviewsController#show as HTML
+  Parameters: {"id"=>"45"}
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT  "interviews".* FROM "interviews" WHERE "interviews"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:122
+  Rendering interviews/show.html.erb within layouts/application
+  [1m[36mParticipant Load (0.1ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 45]]
+  ↳ app/views/interviews/show.html.erb:20
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 45], ["record_type", "Interview"], ["name", "resume"], ["LIMIT", 1]]
+  ↳ app/views/interviews/show.html.erb:29
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/views/interviews/show.html.erb:29
+  Rendered interviews/show.html.erb within layouts/application (7.9ms)
+Completed 200 OK in 45ms (Views: 38.8ms | ActiveRecord: 0.9ms)
+
+
+Started GET "/interviews/45/edit" for ::1 at 2020-01-08 12:57:04 +0530
+Processing by InterviewsController#edit as HTML
+  Parameters: {"id"=>"45"}
+  [1m[36mInterview Load (0.4ms)[0m  [1m[34mSELECT  "interviews".* FROM "interviews" WHERE "interviews"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:122
+  Rendering interviews/edit.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "participants"."id" FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 45]]
+  ↳ app/views/interviews/_form.html.erb:31
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT "participants".* FROM "participants"[0m
+  ↳ app/views/interviews/_form.html.erb:31
+  Rendered interviews/_form.html.erb (14.2ms)
+  Rendered interviews/edit.html.erb within layouts/application (17.5ms)
+Completed 200 OK in 63ms (Views: 53.5ms | ActiveRecord: 0.9ms)
+
+
+Started PATCH "/interviews/45" for ::1 at 2020-01-08 12:57:12 +0530
+Processing by InterviewsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"3FpRElWgkhSek/s6e5KtmFv29OkDMO4IVMOtdq79OcMxPabMPsdIYu8APYuLhiRujgg8J4Nqt6qxz5kbi4Eq7w==", "interview"=>{"startTime(1i)"=>"2000", "startTime(2i)"=>"1", "startTime(3i)"=>"1", "startTime(4i)"=>"07", "startTime(5i)"=>"26", "endTime(1i)"=>"2000", "endTime(2i)"=>"1", "endTime(3i)"=>"1", "endTime(4i)"=>"10", "endTime(5i)"=>"26", "interviewDate(1i)"=>"2020", "interviewDate(2i)"=>"1", "interviewDate(3i)"=>"8", "participant_ids"=>["", "1", "3"], "title"=>"dsa", "resume"=>#<ActionDispatch::Http::UploadedFile:0x00007fa4ce1accf8 @tempfile=#<Tempfile:/var/folders/y7/n0m5qwv50hv5zpbmk3rsfktc0000gn/T/RackMultipart20200108-66903-fg8d4v.md>, @original_filename="README.md", @content_type="application/octet-stream", @headers="Content-Disposition: form-data; name=\"interview[resume]\"; filename=\"README.md\"\r\nContent-Type: application/octet-stream\r\n">}, "commit"=>"Update Interview", "id"=>"45"}
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT  "interviews".* FROM "interviews" WHERE "interviews"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:122
+  [1m[36mParticipant Load (0.1ms)[0m  [1m[34mSELECT  "participants".* FROM "participants" WHERE "participants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:81
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:82
+  [1m[36mInterview::HABTM_Participants Create (0.4ms)[0m  [1m[32mINSERT INTO "interviews_participants" ("interview_id", "participant_id") VALUES (?, ?)[0m  [["interview_id", 45], ["participant_id", 1]]
+  ↳ app/controllers/interviews_controller.rb:82
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/interviews_controller.rb:82
+  [1m[36mParticipant Load (0.3ms)[0m  [1m[34mSELECT  "participants".* FROM "participants" WHERE "participants"."id" = ? LIMIT ?[0m  [["id", 3], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:81
+  [1m[35m (0.3ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:82
+  [1m[36mInterview::HABTM_Participants Create (0.5ms)[0m  [1m[32mINSERT INTO "interviews_participants" ("interview_id", "participant_id") VALUES (?, ?)[0m  [["interview_id", 45], ["participant_id", 3]]
+  ↳ app/controllers/interviews_controller.rb:82
+  [1m[35m (1.6ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/interviews_controller.rb:82
+Unpermitted parameter: :participant_ids
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 45], ["record_type", "Interview"], ["name", "resume"], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:87
+[36m  Disk Storage (6.0ms) [0m[32mUploaded file to key: ZpW7Tu6cp54vTdmcCMJTG6d7 (checksum: EUkEt1YM/TxwDYp8OuRFqA==)[0m
+  [1m[36mActiveStorage::Blob Create (0.4ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["key", "ZpW7Tu6cp54vTdmcCMJTG6d7"], ["filename", "README.md"], ["content_type", "text/markdown"], ["metadata", "{\"identified\":true}"], ["byte_size", 53], ["checksum", "EUkEt1YM/TxwDYp8OuRFqA=="], ["created_at", "2020-01-08 07:27:12.713690"]]
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Attachment Destroy (0.4ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = ?[0m  [["id", 46]]
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Attachment Create (0.2ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "resume"], ["record_type", "Interview"], ["record_id", 45], ["blob_id", 62], ["created_at", "2020-01-08 07:27:12.718824"]]
+  ↳ app/controllers/interviews_controller.rb:87
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: c8902540-c48a-4bef-bb46-9483e21cb57d) to Sidekiq(default) with arguments: #<GlobalID:0x00007fa4ce7ab398 @uri=#<URI::GID gid://interviewapp/ActiveStorage::Blob/61>>
+  [1m[36mParticipant Load (0.1ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 45]]
+  ↳ app/models/interview.rb:7
+  [1m[36mInterview Load (0.1ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 1]]
+  ↳ app/models/interview.rb:9
+  [1m[36mInterview Load (0.2ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 3]]
+  ↳ app/models/interview.rb:9
+  [1m[36mCACHE Interview Load (0.0ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 1]]
+  ↳ app/models/interview.rb:9
+  [1m[36mCACHE Interview Load (0.0ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 3]]
+  ↳ app/models/interview.rb:9
+  [1m[35m (1.4ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/interviews_controller.rb:87
+  Rendering interviews/edit.html.erb within layouts/application
+  [1m[36mParticipant Load (0.3ms)[0m  [1m[34mSELECT "participants".* FROM "participants"[0m
+  ↳ app/views/interviews/_form.html.erb:31
+  Rendered interviews/_form.html.erb (19.7ms)
+  Rendered interviews/edit.html.erb within layouts/application (24.4ms)
+Completed 200 OK in 147ms (Views: 69.7ms | ActiveRecord: 9.0ms)
+
+
+DEPRECATION WARNING: Leaving `ActiveRecord::ConnectionAdapters::SQLite3Adapter.represent_boolean_as_integer`
+set to false is deprecated. SQLite databases have used 't' and 'f' to serialize
+boolean values and must have old data converted to 1 and 0 (its native boolean
+serialization) before setting this flag to true. Conversion can be accomplished
+by setting up a rake task which runs
+
+  ExampleModel.where("boolean_column = 't'").update_all(boolean_column: 1)
+  ExampleModel.where("boolean_column = 'f'").update_all(boolean_column: 0)
+
+for all models and all boolean columns, after which the flag must be set to
+true by adding the following to your application.rb file:
+
+  Rails.application.config.active_record.sqlite3.represent_boolean_as_integer = true
+ (called from instance_eval at /Users/rishabhjaroli/.rvm/gems/ruby-2.3.8/gems/activesupport-5.2.4.1/lib/active_support/lazy_load_hooks.rb:71)
+Started GET "/interviews/45" for ::1 at 2020-01-08 13:02:46 +0530
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  ↳ /Users/rishabhjaroli/.rvm/gems/ruby-2.3.8/gems/activerecord-5.2.4.1/lib/active_record/log_subscriber.rb:98
+Processing by InterviewsController#show as HTML
+  Parameters: {"id"=>"45"}
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT  "interviews".* FROM "interviews" WHERE "interviews"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:122
+  Rendering interviews/show.html.erb within layouts/application
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 45]]
+  ↳ app/views/interviews/show.html.erb:20
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 45], ["record_type", "Interview"], ["name", "resume"], ["LIMIT", 1]]
+  ↳ app/views/interviews/show.html.erb:29
+  [1m[36mActiveStorage::Blob Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/views/interviews/show.html.erb:29
+  Rendered interviews/show.html.erb within layouts/application (65.0ms)
+Completed 200 OK in 322ms (Views: 285.4ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/interviews/45/edit" for ::1 at 2020-01-08 13:02:50 +0530
+Processing by InterviewsController#edit as HTML
+  Parameters: {"id"=>"45"}
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT  "interviews".* FROM "interviews" WHERE "interviews"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:122
+  Rendering interviews/edit.html.erb within layouts/application
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "participants"."id" FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 45]]
+  ↳ app/views/interviews/_form.html.erb:31
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT "participants".* FROM "participants"[0m
+  ↳ app/views/interviews/_form.html.erb:31
+  Rendered interviews/_form.html.erb (21.7ms)
+  Rendered interviews/edit.html.erb within layouts/application (24.9ms)
+Completed 200 OK in 56ms (Views: 48.2ms | ActiveRecord: 0.9ms)
+
+
+Started PATCH "/interviews/45" for ::1 at 2020-01-08 13:02:58 +0530
+Processing by InterviewsController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"kyvIs4ecryTfNaJE/QeZ5zX81cQkMP/zBfsnX+/vsHZ+TD9t7Pt1Uq6mZPUNExAR4AIdCqRqplHg9xMyypOjWg==", "interview"=>{"startTime(1i)"=>"2000", "startTime(2i)"=>"1", "startTime(3i)"=>"1", "startTime(4i)"=>"07", "startTime(5i)"=>"26", "endTime(1i)"=>"2000", "endTime(2i)"=>"1", "endTime(3i)"=>"1", "endTime(4i)"=>"08", "endTime(5i)"=>"26", "interviewDate(1i)"=>"2020", "interviewDate(2i)"=>"1", "interviewDate(3i)"=>"8", "participant_ids"=>["", "1"], "title"=>"dsa", "resume"=>#<ActionDispatch::Http::UploadedFile:0x00007fe7cf9fab00 @tempfile=#<Tempfile:/var/folders/y7/n0m5qwv50hv5zpbmk3rsfktc0000gn/T/RackMultipart20200108-69256-1glmls8.md>, @original_filename="README.md", @content_type="application/octet-stream", @headers="Content-Disposition: form-data; name=\"interview[resume]\"; filename=\"README.md\"\r\nContent-Type: application/octet-stream\r\n">}, "commit"=>"Update Interview", "id"=>"45"}
+  [1m[36mInterview Load (0.1ms)[0m  [1m[34mSELECT  "interviews".* FROM "interviews" WHERE "interviews"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:122
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT  "participants".* FROM "participants" WHERE "participants"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:81
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:82
+  [1m[36mInterview::HABTM_Participants Create (0.4ms)[0m  [1m[32mINSERT INTO "interviews_participants" ("interview_id", "participant_id") VALUES (?, ?)[0m  [["interview_id", 45], ["participant_id", 1]]
+  ↳ app/controllers/interviews_controller.rb:82
+  [1m[35m (1.9ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/interviews_controller.rb:82
+Unpermitted parameter: :participant_ids
+  [1m[35m (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Attachment Load (0.4ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 45], ["record_type", "Interview"], ["name", "resume"], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 61], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:87
+[36m  Disk Storage (2.3ms) [0m[32mUploaded file to key: BQ1u7P4bW7Y5RhQiMUiazfVY (checksum: EUkEt1YM/TxwDYp8OuRFqA==)[0m
+  [1m[36mActiveStorage::Blob Create (0.7ms)[0m  [1m[32mINSERT INTO "active_storage_blobs" ("key", "filename", "content_type", "metadata", "byte_size", "checksum", "created_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["key", "BQ1u7P4bW7Y5RhQiMUiazfVY"], ["filename", "README.md"], ["content_type", "text/markdown"], ["metadata", "{\"identified\":true}"], ["byte_size", 53], ["checksum", "EUkEt1YM/TxwDYp8OuRFqA=="], ["created_at", "2020-01-08 07:32:58.544805"]]
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Attachment Destroy (0.2ms)[0m  [1m[31mDELETE FROM "active_storage_attachments" WHERE "active_storage_attachments"."id" = ?[0m  [["id", 46]]
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[36mActiveStorage::Attachment Create (0.1ms)[0m  [1m[32mINSERT INTO "active_storage_attachments" ("name", "record_type", "record_id", "blob_id", "created_at") VALUES (?, ?, ?, ?, ?)[0m  [["name", "resume"], ["record_type", "Interview"], ["record_id", 45], ["blob_id", 62], ["created_at", "2020-01-08 07:32:58.549259"]]
+  ↳ app/controllers/interviews_controller.rb:87
+[ActiveJob] Enqueued ActiveStorage::PurgeJob (Job ID: 14274bbb-4ebf-4d37-9545-9273ff8772b6) to Sidekiq(default) with arguments: #<GlobalID:0x00007fe7d1301bf8 @uri=#<URI::GID gid://interviewapp/ActiveStorage::Blob/61>>
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 45]]
+  ↳ app/models/interview.rb:7
+  [1m[36mInterview Load (0.3ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 1]]
+  ↳ app/models/interview.rb:9
+  [1m[36mInterview Load (0.2ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 3]]
+  ↳ app/models/interview.rb:9
+  [1m[36mCACHE Interview Load (0.0ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 1]]
+  ↳ app/models/interview.rb:9
+  [1m[36mCACHE Interview Load (0.0ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 3]]
+  ↳ app/models/interview.rb:9
+  [1m[36mCACHE Interview Load (0.0ms)[0m  [1m[34mSELECT "interviews".* FROM "interviews" INNER JOIN "interviews_participants" ON "interviews"."id" = "interviews_participants"."interview_id" WHERE "interviews_participants"."participant_id" = ?[0m  [["participant_id", 1]]
+  ↳ app/models/interview.rb:9
+  [1m[36mInterview Update (0.2ms)[0m  [1m[33mUPDATE "interviews" SET "updated_at" = ? WHERE "interviews"."id" = ?[0m  [["updated_at", "2020-01-08 07:32:58.550413"], ["id", 45]]
+  ↳ app/controllers/interviews_controller.rb:87
+  [1m[35m (1.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/interviews_controller.rb:87
+[ActiveJob] Enqueued ActiveStorage::AnalyzeJob (Job ID: f89e6297-cb60-4e8a-a1b4-d2c18941fc8c) to Sidekiq(default) with arguments: #<GlobalID:0x00007fe7d10d9a38 @uri=#<URI::GID gid://interviewapp/ActiveStorage::Blob/62>>
+  Rendering reminder_mailer/update_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/update_email.html.erb within layouts/mailer (0.4ms)
+ReminderMailer#update_email: processed outbound mail in 54.0ms
+Sent mail to interviewer@gmail.com (4065.5ms)
+Date: Wed, 08 Jan 2020 13:02:58 +0530
+From: aswanth9495@gmail.com
+To: interviewer@gmail.com
+Message-ID: <5e1585aabf6c5_10e883ff3e8054314106db@Rishabhs-MacBook-Air.local.mail>
+Subject: Interview Updated
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Interview is updated</h1>
+    <p>
+      Thanks! 
+    </p>
+  </body>
+</html>
+  </body>
+</html>
+
+  Rendering reminder_mailer/update_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/update_email.html.erb within layouts/mailer (0.1ms)
+ReminderMailer#update_email: processed outbound mail in 31.0ms
+Sent mail to shadow1@gmail.com (4835.3ms)
+Date: Wed, 08 Jan 2020 13:03:02 +0530
+From: aswanth9495@gmail.com
+To: shadow1@gmail.com
+Message-ID: <5e1585aed706a_10e883ff3e80543141078c@Rishabhs-MacBook-Air.local.mail>
+Subject: Interview Updated
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Interview is updated</h1>
+    <p>
+      Thanks! 
+    </p>
+  </body>
+</html>
+  </body>
+</html>
+
+  Rendering reminder_mailer/update_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/update_email.html.erb within layouts/mailer (0.0ms)
+ReminderMailer#update_email: processed outbound mail in 29.2ms
+Sent mail to interviewer@gmail.com (3665.5ms)
+Date: Wed, 08 Jan 2020 13:03:07 +0530
+From: aswanth9495@gmail.com
+To: interviewer@gmail.com
+Message-ID: <5e1585b3b6a82_10e883ff3e80543141083c@Rishabhs-MacBook-Air.local.mail>
+Subject: Interview Updated
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Interview is updated</h1>
+    <p>
+      Thanks! 
+    </p>
+  </body>
+</html>
+  </body>
+</html>
+
+  Rendering reminder_mailer/update_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/update_email.html.erb within layouts/mailer (0.1ms)
+ReminderMailer#update_email: processed outbound mail in 34.6ms
+Sent mail to shadow1@gmail.com (3949.0ms)
+Date: Wed, 08 Jan 2020 13:03:11 +0530
+From: aswanth9495@gmail.com
+To: shadow1@gmail.com
+Message-ID: <5e1585b76dc61_10e883ff3e8054314109da@Rishabhs-MacBook-Air.local.mail>
+Subject: Interview Updated
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Interview is updated</h1>
+    <p>
+      Thanks! 
+    </p>
+  </body>
+</html>
+  </body>
+</html>
+
+  Rendering reminder_mailer/update_email.html.erb within layouts/mailer
+  Rendered reminder_mailer/update_email.html.erb within layouts/mailer (0.0ms)
+ReminderMailer#update_email: processed outbound mail in 31.3ms
+Sent mail to interviewer@gmail.com (3661.6ms)
+Date: Wed, 08 Jan 2020 13:03:15 +0530
+From: aswanth9495@gmail.com
+To: interviewer@gmail.com
+Message-ID: <5e1585bb69624_10e883ff3e80543141101d@Rishabhs-MacBook-Air.local.mail>
+Subject: Interview Updated
+Mime-Version: 1.0
+Content-Type: text/html;
+ charset=UTF-8
+Content-Transfer-Encoding: 7bit
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <style>
+      /* Email styles need to be inline */
+    </style>
+  </head>
+
+  <body>
+    <!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Interview is updated</h1>
+    <p>
+      Thanks! 
+    </p>
+  </body>
+</html>
+  </body>
+</html>
+
+Redirected to http://localhost:3001/interviews/45
+Completed 302 Found in 20587ms (ActiveRecord: 7.5ms)
+
+
+Started GET "/interviews/45" for ::1 at 2020-01-08 13:03:19 +0530
+Processing by InterviewsController#show as HTML
+  Parameters: {"id"=>"45"}
+  [1m[36mInterview Load (0.2ms)[0m  [1m[34mSELECT  "interviews".* FROM "interviews" WHERE "interviews"."id" = ? LIMIT ?[0m  [["id", 45], ["LIMIT", 1]]
+  ↳ app/controllers/interviews_controller.rb:122
+  Rendering interviews/show.html.erb within layouts/application
+  [1m[36mParticipant Load (0.2ms)[0m  [1m[34mSELECT "participants".* FROM "participants" INNER JOIN "interviews_participants" ON "participants"."id" = "interviews_participants"."participant_id" WHERE "interviews_participants"."interview_id" = ?[0m  [["interview_id", 45]]
+  ↳ app/views/interviews/show.html.erb:20
+  [1m[36mActiveStorage::Attachment Load (0.2ms)[0m  [1m[34mSELECT  "active_storage_attachments".* FROM "active_storage_attachments" WHERE "active_storage_attachments"."record_id" = ? AND "active_storage_attachments"."record_type" = ? AND "active_storage_attachments"."name" = ? LIMIT ?[0m  [["record_id", 45], ["record_type", "Interview"], ["name", "resume"], ["LIMIT", 1]]
+  ↳ app/views/interviews/show.html.erb:29
+  [1m[36mActiveStorage::Blob Load (0.1ms)[0m  [1m[34mSELECT  "active_storage_blobs".* FROM "active_storage_blobs" WHERE "active_storage_blobs"."id" = ? LIMIT ?[0m  [["id", 62], ["LIMIT", 1]]
+  ↳ app/views/interviews/show.html.erb:29
+  Rendered interviews/show.html.erb within layouts/application (9.2ms)
+Completed 200 OK in 58ms (Views: 53.5ms | ActiveRecord: 0.7ms)
+
+
