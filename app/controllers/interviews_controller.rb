@@ -8,7 +8,7 @@ class InterviewsController < ApplicationController
   before_action :set_interview, only: [:show, :edit, :update, :destroy]
   # GET /interviews
   # GET /interviews.json
-  @@notifyArray = []
+  # @@notifyArray = []
   def index
     @interviews = Interview.all
     # ReminderMailer.sample_email("aswanth@interviewbit.com").deliver_now
