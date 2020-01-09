@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Create Participant</title>
+</head>
+<body>
+    <!-- As a heading -->
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Create Participant</span>
+</nav>
+<div class="container">
+    <form id="create-participant">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" name="name" class="form-control" id="name">
+          
+        </div>
+        <div class="form-group">
+            <label for="role">Role</label>
+            <input type="text" name="start" class="form-control" id="role">
+        </div>
+        <div class="form-group">
+            <label for="email">email</label>
+            <input type="email" name="email" class="form-control" id="email">
+        </div>
+        
+        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+      </form>
+</div>
+<script>
+    const btn = document.querySelector('create-participant');
+function sendJSON(){ 
+               
+            //    let result = document.querySelector('.result'); 
+               let name = document.querySelector('#name'); 
+               let role = document.querySelector('#role'); 
+               let email = document.querySelector('#email');  
+                 
+               // Creating a XHR object 
+               let xhr = new XMLHttpRequest(); 
+               let url = "http://localhost:3001/api/v1/participants/"; 
+           
+               // open a connection 
+               xhr.open("POST", url, true); 
+     
+               // Set the request header i.e. which type of content you are sending 
+               xhr.setRequestHeader("Content-Type", "application/json"); 
+     
+               // Create a state change callback 
+               xhr.onreadystatechange = function () { 
+                   if (xhr.readyState === 4 && xhr.status === 200) { 
+     
+                       // Print received data from server 
+                    //    result.innerHTML = this.responseText; 
+                    console.log(this.responseText);
+                    alert('Done');
+     
+                   } 
+               }; 
+     
+               // Converting JSON data to string 
+               var data = JSON.stringify({ "name": name.value, "role": role.value, "email": email.value }); 
+     
+               // Sending data with the request 
+               xhr.send(data); 
+           } 
+           let form = document.getElementById( "create-participant" );
+           form.addEventListener( "submit", function ( event ) {
+            event.preventDefault();
+            sendJSON();
+        });
+</script> 
+</body>
+</html>

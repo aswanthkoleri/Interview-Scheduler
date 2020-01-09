@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Update Interview</title>
+</head>
+<body>
+    <!-- As a heading -->
+<nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Update Interview</span>
+</nav>
+<div class="container">
+    <form id="update-interview">
+        <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="interviewId">Select Interview</label>
+            </div>
+            <select class="custom-select" id="interviewId">
+              <option selected>Choose...</option>
+              <!-- <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option> -->
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="date">Interview Date</label>
+            <input type="date" name="date" class="form-control" id="date">
+          </div>
+        <div class="form-group">
+            <label for="start">Start time</label>
+            <input type="time" name="start" class="form-control" id="start">
+        </div>
+        <div class="form-group">
+            <label for="end">End time</label>
+            <input type="time" name="end" class="form-control" id="end">
+        </div>
+        <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" name="title" class="form-control" id="title">
+        </div>
+        <div class="form-group">
+            <label for="participants">Participants</label>
+            <input type="text" name="participants" class="form-control" id="participants" placeholder="Separate the participant ids by comma">
+        </div>
+        <!-- <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <label class="input-group-text" for="participants">Select participants</label>
+            </div>
+            <select class="custom-select" id="participants">
+              <option selected>Choose...</option>
+              <option value="1">One</option>
+              <option value="2">Two</option>
+              <option value="3">Three</option>
+            </select>
+          </div> -->
+        <button type="submit" name="submit" class="btn btn-primary">Submit</button>
+      </form>
+
+      <h2>Available Participants</h2>
+      <p id="content">
+
+      </p>
+</div>
+<script>
+    const btn = document.querySelector('update-interview');
+function sendJSON(){ 
+               
+            //    let result = document.querySelector('.result'); 
+               let interviewId = document.querySelector("#interviewId")
+               let date = document.querySelector('#date'); 
+               let start = document.querySelector('#start'); 
+               let end = document.querySelector('#end');  
+               let title = document.querySelector('#title');
+               let participants = document.querySelector('#participants');
+               // Creating a XHR object 
+               let xhr = new XMLHttpRequest(); 
+               let url = "http://localhost:3001/api/v1/interviews/"+interviewId.value; 
+
+               // open a connection 
+               xhr.open("PUT", url, true); 
+     
+               // Set the request header i.e. which type of content you are sending 
+               xhr.setRequestHeader("Content-Type", "application/json"); 
+     
+               // Create a state change callback 
+               xhr.onreadystatechange = function () { 
+                   console.log(xhr.readyState)
+                    console.log(xhr)
+                   if (xhr.readyState === 4 && xhr.status === 200) { 
+     
+                       // Print received data from server 
+                    //    result.innerHTML = this.responseText; 
+                    console.log(JSON.parse(this.responseText));
+                    res = JSON.parse(this.responseText)
+                    if (res.code == 3000){
+                        alert("There is an overlap in date and time")
+                    }else{
+                        alert("The Interview is created")
+                    }
+                   } 
+               }; 
+     
+               // Converting JSON data to string 
+               var data = JSON.stringify({ "date": date.value, "start": start.value, "end": end.value, "title": title.value,"participantlist": participants.value }); 
+     
+               // Sending data with the request 
+               xhr.send(data);
+           } 
+           let form = document.getElementById( "update-interview" );
+           form.addEventListener( "submit", function ( event ) {
+            event.preventDefault();
+            sendJSON();
+        });
+</script> 
+<script>
+    // const url = "http://localhost:3001/api/v1/participants";
+    // doc.onload =  getRequest() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        console.log(JSON.parse(this.responseText));
+        var p = JSON.parse(this.responseText);
+        for (var i=0;i<p.length;i++){
+        document.getElementById("interviewId").innerHTML+='<option value="'+ p[i].id + '">' +p[i].title+'</option>'
+        // document.getElementById("content").innerHTML+="<strong>"+p[i].name+"</strong><br>"
+        }
+        }
+    };
+request.open('GET', 'http://localhost:3001/api/v1/interviews');
+request.send();
+    // };
+    let interviewId = document.getElementById("interviewId");
+    interviewId.onchange  = function(){
+        console.log("You have selected "+interviewId.value);
+        let date = document.querySelector('#date'); 
+        let start = document.querySelector('#start'); 
+        let end = document.querySelector('#end');  
+        let title = document.querySelector('#title');
+        let participants = document.querySelector('#participants');
+        var show = new XMLHttpRequest();
+        show.open('GET', 'http://localhost:3001/api/v1/interviews/'+interviewId.value);
+        show.send();
+        show.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            var p = JSON.parse(this.responseText);
+            console.log(p)
+            date.value = p.date
+            var startTime = p.start
+            startTime = startTime.split(/[-:T]/)
+            // console.log(startTime)
+            start.value = startTime[3]+":"+startTime[4]
+            var endTime = p.end
+            endTime = endTime.split(/[-:T]/)
+            end.value = endTime[3]+":"+endTime[4]
+            title.value = p.title 
+            participants.value="";
+            for(var i=0;i<p.participants.length;i++){
+                participants.value+=p.participants[i].id +','
+            }
+        }
+        }
+    };
+</script>
+<script>
+    const url = "http://localhost:3001/api/v1/participants";
+    // doc.onload =  getRequest() {
+    var request = new XMLHttpRequest();
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+        console.log(JSON.parse(this.responseText));
+        var p = JSON.parse(this.responseText)
+        for (var i=0;i<p.length;i++){
+        document.getElementById("content").innerHTML+="<strong>"+p[i].id+" "+p[i].name+"</strong><br>"
+        // document.getElementById("content").innerHTML+="<strong>"+p[i].name+"</strong><br>"
+        }
+        }
+    };
+request.open('GET', 'http://localhost:3001/api/v1/participants');
+request.send();
+    // };
+</script>
+</body>
+</html>

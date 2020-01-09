@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <title>Interviews available</title>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light">
+        <span class="navbar-brand mb-0 h1">Interviews List</span>
+    </nav>
+    <div class="container">
+            <div id="content">
+
+            </div>
+    </div>
+    <script>
+        const url = "http://localhost:3001/api/v1/interviews";
+        // doc.onload =  getRequest() {
+        var request = new XMLHttpRequest();
+        request.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+            console.log(JSON.parse(this.responseText));
+            var p = JSON.parse(this.responseText)
+            for (var i=0;i<p.length;i++){
+            document.getElementById("content").innerHTML+='<div class="alert alert-primary" role="alert">'+'<b>Date: </b>'+p[i].date+" "+'<b>Start Time: </b>'+p[i].start +" "+'<b>End Time: </b>'+p[i].end+" "+'<b>Title: </b>'+p[i].title+"</div>"
+            // document.getElementById("content").innerHTML+="<strong>"+p[i].name+"</strong><br>"
+            }
+            }
+        };
+    request.open('GET', 'http://localhost:3001/api/v1/interviews');
+    request.send();
+        // };
+    </script>
+</body>
+</html>
