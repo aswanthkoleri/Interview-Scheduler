@@ -23,7 +23,7 @@ module Api::V1
       end
       private
         def participant_params
-          params.require(:participant).permit(:name,:email,:role)
+          params.require(:participant).permit(:email)
         end
     end
 end

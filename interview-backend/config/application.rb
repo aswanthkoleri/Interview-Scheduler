@@ -35,8 +35,8 @@ module App
     config.active_job.queue_adapter = :sidekiq
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins 'http://localhost:8000'
-        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
+        origins '*'
+        resource '*', headers: :any, methods: [:get, :post, :options,:put,:delete]
       end
     end
   end
